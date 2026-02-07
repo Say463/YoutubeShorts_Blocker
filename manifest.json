@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Shorts Time Guard",
+  "version": "1.0",
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["content.js"],
+      "css": ["style.css"]
+    }
+  ]
+}
