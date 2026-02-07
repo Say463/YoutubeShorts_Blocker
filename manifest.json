@@ -1,12 +1,20 @@
 {
   "manifest_version": 3,
-  "name": "Shorts Time Guard",
+  "name": "YoutubeShorts_Blocker",
   "version": "1.0",
   "permissions": ["storage"],
+  "description":"YoutubeShortsの時間規制機能",
+  "action":{
+    "default_icon": {
+      "128":"icon128.png"
+      }
+    },
+    "default_title":"YoutubeShorts_Blocker",
+    "default_popup":"popup.html",
   "content_scripts": [
     {
       "matches": ["https://www.youtube.com/*"],
-      "js": ["content.js"],
+      "js": ["content.js","popup.js"],
       "css": ["style.css"]
     }
   ]

@@ -2,8 +2,9 @@ const LIMIT_SECONDS = 10 * 60; // 上限10分
 
 let today = new Date().toDateString();
 
-//Youtubeかどうかを判定
-function isYoutube() {
+
+//Youtubeshortかどうかを判定
+function isYoutubeshort() {
   return location.pathname.startsWith("/shorts");
 }
 
@@ -44,7 +45,7 @@ function updateHUD(seconds) {
 }
 
 async function tick() {
-  if (!isYoutube() || document.hidden) return;
+  if (!isYoutubeshort() || document.hidden) return;
 
   let data = await getData();
   let time = data.time || 0;

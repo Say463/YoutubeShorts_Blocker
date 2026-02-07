@@ -1,3 +1,51 @@
+
+/*popup*/
+
+body {
+  width: 300px;
+  padding: 12px;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+
+
+/*決定ボタン*/
+.btn-simple-solid {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+  /*ボタンに触れた時*/
+.btn-simple-solid:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+.btn-simple-solid:active {
+  transform: translateY(0);
+}
+
+
+
+/*スライダー*/
+
+.slider-simple-type {
+  width: 100%;
+  margin: 12px 0;
+}
+
+
+
+
+
+
 .short-hud {
       position: fixed;
       top: 12px;
