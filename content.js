@@ -1,7 +1,5 @@
 let LIMIT_SECONDS;
-
 let today = new Date().toDateString();
-
 
 //Youtubeshortかどうかを判定
 function isYoutubeshort() {
@@ -28,7 +26,6 @@ function format(sec) {
 }
 
 function updateHUD(seconds) {
-
   showHUD(seconds) // HUDを更新
 
   const hud = document.getElementById("shorts-hud") //DOMからHUDを取得
@@ -63,7 +60,6 @@ async function tick() {
 }
 
 // LIMIT_SECOND をpopup.jsから受け取って、tickに設定
-
 async function setting() {
   const data = await new Promise(resolve => {
     chrome.storage.local.get({limitSecond:600}, resolve)
@@ -71,7 +67,6 @@ async function setting() {
   LIMIT_SECONDS = data.limitSecond // LIMIT_SECONDSはlimitSecond値を格納
 
 }
-
 
 function showHUD(seconds) {
   let hud = document.getElementById("shorts-hud");
@@ -93,30 +88,16 @@ function showWarning(seconds) {
   if (!warn) {
     warn = document.createElement("div");
     warn.id = "shorts-warning";
-    warn.style = `
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.75);
-      backdrop-filter: blur(5px);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-size: 22px;
-      z-index: 9999999;
-    `;
+    warn.classList.add("warning")
     document.body.appendChild(warn);
   }
 
   warn.innerHTML = `
-    ⚠ Shorts見すぎ<br><br>
+    ⚠ Shortsの制限時間を超過<br><br>
     今日: ${format(seconds)}<br><br>
     もうやめよう
   `;
 }
-
-
 
 await setting();
 setInterval(tick, 1000); //一秒ごとにtickを行う
