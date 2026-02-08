@@ -1,4 +1,4 @@
-const LIMIT_SECONDS = 10 * 60; // 上限10分
+let LIMIT_SECONDS;
 
 let today = new Date().toDateString();
 
@@ -29,22 +29,26 @@ function format(sec) {
 
 function updateHUD(seconds) {
 
-  showHUD(time) // HUDを更新
-  const REMAIN_SECONDS = LIMIT_SECONDS - seconds
-  if(REMAIN_SECONDS <= 60) {
+  showHUD(seconds) // HUDを更新
 
+  const hud = document.getElementById("shorts-hud") //DOMからHUDを取得
+  const REMAIN_SECONDS = LIMIT_SECONDS - seconds
+  if(REMAIN_SECONDS <= 60 && hud) {
     hud.classList.add("blink");
   }
-  else{
-    hud.classList.add("blink");
-  }  
+  // 条件外でblinkを含んでいたなら
+  else { 
+    if(hud.classList.contains("blink")) {
+      hud.classList.remove("blink");
+    }  
+  }
 }
 
 async function tick() {
   if (!isYoutubeshort() || document.hidden) return;
 
   let data = await getData();
-  let time = data.time || 0;
+  let time = data.time || 0; //初期値は0
   // 今日でなければtimeを更新する。
   if (data.date !== today) time = 0;
 
@@ -58,7 +62,15 @@ async function tick() {
   }
 }
 
+// LIMIT_SECOND をpopup.jsから受け取って、tickに設定
 
+async function setting() {
+  const data = await new Promise(resolve => {
+    chrome.storage.local.get({limitSecond:600}, resolve)
+  } );
+  LIMIT_SECONDS = data.limitSecond // LIMIT_SECONDSはlimitSecond値を格納
+
+}
 
 
 function showHUD(seconds) {
@@ -72,7 +84,7 @@ function showHUD(seconds) {
     document.body.appendChild(hud);
   }
 
-  hud.textContent = `Shorts: ${format(seconds)} / 10:00`;
+  hud.textContent = `Shorts: ${format(seconds)} / ${format(LIMIT_SECONDS)}`;
 }
 
 function showWarning(seconds) {
@@ -104,4 +116,7 @@ function showWarning(seconds) {
   `;
 }
 
+
+
+await setting();
 setInterval(tick, 1000); //一秒ごとにtickを行う
