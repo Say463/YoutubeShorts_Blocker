@@ -1,5 +1,6 @@
 let LIMIT_SECONDS;
 let today = new Date().toDateString();
+let limitExceeded = false;
 
 //Youtubeshortかどうかを判定
 function isYoutubeshort() {
@@ -48,7 +49,6 @@ async function tick() {
 
   let data = await getData();
   let time = data.time || 0; //初期値は0
-  let limitExceeded = false;
   // 今日でなければtimeを更新する。
   if (data.date !== today) time = 0;
 
