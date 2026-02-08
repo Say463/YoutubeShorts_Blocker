@@ -7,10 +7,10 @@
   "action":{
     "default_icon": {
       "128":"icon128.png"
-      }
-    },
+      },
     "default_title":"YoutubeShorts_Blocker",
-    "default_popup":"popup.html",
+    "default_popup":"popup.html"
+  },
   "content_scripts": [
     {
       "matches": ["https://www.youtube.com/*"],

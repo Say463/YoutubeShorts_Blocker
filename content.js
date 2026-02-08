@@ -27,10 +27,12 @@ function format(sec) {
 
 function updateHUD(seconds) {
   showHUD(seconds) // HUDを更新
-
+  
   const hud = document.getElementById("shorts-hud") //DOMからHUDを取得
+  if(!hud) return; // HUDがなければreturn
+
   const REMAIN_SECONDS = LIMIT_SECONDS - seconds
-  if(REMAIN_SECONDS <= 60 && hud) {
+  if(REMAIN_SECONDS <= 60 && REMAIN_SECONDS > 0) {
     hud.classList.add("blink");
   }
   // 条件外でblinkを含んでいたなら
@@ -42,10 +44,11 @@ function updateHUD(seconds) {
 }
 
 async function tick() {
-  if (!isYoutubeshort() || document.hidden) return;
+  if (!isYoutubeshort() || document.hidden || limitExceeded) return;
 
   let data = await getData();
   let time = data.time || 0; //初期値は0
+  let limitExceeded = false;
   // 今日でなければtimeを更新する。
   if (data.date !== today) time = 0;
 
@@ -55,6 +58,7 @@ async function tick() {
   updateHUD(time)
 
   if (time >= LIMIT_SECONDS) {
+    limitExceeded = true; //超過フラグ
     showWarning(time);
   }
 }
