@@ -27,7 +27,7 @@ function format(sec) {
 
 function updateHUD(seconds) {
   showHUD(seconds) // HUDを更新
-  
+
   const hud = document.getElementById("shorts-hud") //DOMからHUDを取得
   if(!hud) return; // HUDがなければreturn
 
@@ -103,5 +103,4 @@ function showWarning(seconds) {
   `;
 }
 
-await setting();
-setInterval(tick, 1000); //一秒ごとにtickを行う
+(async () => {await setting();setInterval(tick, 1000);})();
