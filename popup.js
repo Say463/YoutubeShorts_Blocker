@@ -4,7 +4,7 @@ const savebutton = document.getElementById("savebutton");
 
 // spanに現在の値を代入
 const setCurrentValue = (val) => {
-    slidarElem.innerText = val;
+    sliderElem.innerText = val;
 }
 
 

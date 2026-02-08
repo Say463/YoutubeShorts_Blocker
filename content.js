@@ -30,18 +30,14 @@ function format(sec) {
 function updateHUD(seconds) {
 
   showHUD(time) // HUDを更新
-
   const REMAIN_SECONDS = LIMIT_SECONDS - seconds
-
   if(REMAIN_SECONDS <= 60) {
 
     hud.classList.add("blink");
   }
   else{
     hud.classList.add("blink");
-  }
-
-  
+  }  
 }
 
 async function tick() {
@@ -49,7 +45,7 @@ async function tick() {
 
   let data = await getData();
   let time = data.time || 0;
-
+  // 今日でなければtimeを更新する。
   if (data.date !== today) time = 0;
 
   time += 1;
