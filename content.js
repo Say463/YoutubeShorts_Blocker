@@ -36,7 +36,6 @@ function updateHUD(seconds) {
   if(REMAIN_SECONDS <= 60 && REMAIN_SECONDS > 0) {
     hud.classList.add("blink");
   }
-  // 条件外でblinkを含んでいたなら
   else { 
     if(hud.classList.contains("blink")) {
       hud.classList.remove("blink");
@@ -49,7 +48,6 @@ async function tick() {
 
   let data = await getData();
   let time = data.time || 0; //初期値は0
-  // 今日でなければtimeを更新する。
   if (data.date !== today) time = 0;
 
   time += 1;
@@ -58,7 +56,7 @@ async function tick() {
   updateHUD(time)
 
   if (time >= LIMIT_SECONDS) {
-    limitExceeded = true; //超過フラグ
+    limitExceeded = true; 
     showWarning(time);
   }
 }
@@ -99,7 +97,7 @@ function showWarning(seconds) {
   warn.innerHTML = `
     ⚠ Shortsの制限時間を超過<br><br>
     今日: ${format(seconds)}<br><br>
-    もうやめよう
+    終了
   `;
 }
 

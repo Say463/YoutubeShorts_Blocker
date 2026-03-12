@@ -2,7 +2,7 @@ const slider = document.getElementById("timeslider");
 const sliderElem = document.getElementById("sliderValue");
 const savebutton = document.getElementById("savebutton");
 
-// spanに現在の値を代入
+
 const setCurrentValue = (val) => {
     sliderElem.innerText = val;
 }
@@ -13,7 +13,7 @@ const rangeOnChange = (e) =>{
 }
 
 window.onload = async () => {
-    slider.addEventListener('input', rangeOnChange); // スライダー変化時にイベントを発火
+    slider.addEventListener('input', rangeOnChange); 
     const data = await chrome.storage.local.get("limitMinute")
     if (data.limitMinute) {
         slider.value = data.limitMinute; //前回の値を代入
